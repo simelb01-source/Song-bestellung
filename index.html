@@ -125,10 +125,6 @@
       font-size: 0.8rem;
       color: #9ca3af;
     }
-    @media (max-width: 640px) {
-      main { padding: 1rem; }
-      .card { padding: 1.25rem; }
-    }
   </style>
 </head>
 <body>
@@ -143,7 +139,7 @@
       <h2>Bestellformular</h2>
       <p class="small">
         Fülle das Formular aus und klicke auf „Bestell‑E‑Mail öffnen“.  
-        Es öffnet sich eine E‑Mail mit allen Angaben, die du nur noch absenden musst.
+        Es öffnet sich GMX.ch mit allen Angaben, die du nur noch absenden musst.
       </p>
 
       <form id="songForm">
@@ -161,7 +157,6 @@
 
         <label for="lyrics">Dein Liedtext</label>
         <textarea id="lyrics" placeholder="Hier deinen eigenen Text einfügen…" required></textarea>
-        <div class="hint">Hinweis: Der Text wird so gut wie möglich übernommen. Kleine Anpassungen für Rhythmus & Melodie sind möglich.</div>
 
         <div class="twint-box">
           <strong>Bezahlung per Twint – nur 5.– CHF</strong><br><br>
@@ -172,8 +167,13 @@
         </div>
 
         <div class="btn-row">
-          <button type="button" onclick="openMail()">Bestell‑E‑Mail öffnen</button>
-          <a class="ghost-btn" href="mailto:blemis@gmx.ch">Direkt E‑Mail schreiben</a>
+          <button type="button" onclick="openGMX()">Bestell‑E‑Mail öffnen</button>
+
+          <a class="ghost-btn"
+             href="https://navigator.gmx.net/mail?compose=1&to=blemis@gmx.ch"
+             target="_blank">
+             Direkt E‑Mail über GMX.ch schreiben
+          </a>
         </div>
       </form>
     </section>
@@ -186,7 +186,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    function openMail() {
+    function openGMX() {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const style = document.getElementById('style').value.trim();
@@ -198,24 +198,27 @@
         return;
       }
 
-      const to = 'blemis@gmx.ch';
       const subject = encodeURIComponent('Bestellung: Persönlicher Song – ' + title);
-      const bodyLines = [
-        'Bestellung: Persönlicher Song',
-        '--------------------------------',
-        'Name: ' + name,
-        'E‑Mail für den fertigen Song: ' + email,
-        'Lieblings‑Musikstil: ' + style,
-        'Titel / Thema: ' + title,
-        '',
-        'Liedtext:',
-        lyrics,
-        '',
-        'Hinweis: Twint‑Zahlung (5.– CHF) mit Vermerk „' + name + ' – ' + title + '“'
-      ];
-      const body = encodeURIComponent(bodyLines.join('\n'));
 
-      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+      const body =
+        encodeURIComponent(
+          'Bestellung: Persönlicher Song\n' +
+          '--------------------------------\n' +
+          'Name: ' + name + '\n' +
+          'E‑Mail für den fertigen Song: ' + email + '\n' +
+          'Lieblings‑Musikstil: ' + style + '\n' +
+          'Titel / Thema: ' + title + '\n\n' +
+          'Liedtext:\n' + lyrics + '\n\n' +
+          'Hinweis: Twint‑Zahlung (5.– CHF) mit Vermerk „' + name + ' – ' + title + '“'
+        );
+
+      const url =
+        'https://navigator.gmx.net/mail?compose=1' +
+        '&to=blemis@gmx.ch' +
+        '&subject=' + subject +
+        '&body=' + body;
+
+      window.open(url, '_blank');
     }
   </script>
 </body>
