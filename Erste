@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Dein persönlicher Song – Bestellung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+    h1 {
+      margin: 0.2rem 0;
+      font-size: 1.9rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+    }
+    .subtitle {
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 3rem;
+    }
+    .card {
+      background: #020617;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      border: 1px solid #1f2937;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.5rem;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid #22c55e;
+      border-color: #22c55e;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.15rem;
+    }
+    .twint-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background: #022c22;
+      border: 1px solid #16a34a;
+      font-size: 0.9rem;
+    }
+    .twint-box strong {
+      color: #bbf7d0;
+    }
+    .btn-row {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    button,
+    .ghost-btn {
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+    }
+    button {
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #16a34a;
+    }
+    .ghost-btn {
+      background: transparent;
+      border: 1px solid #4b5563;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      padding-bottom: 1.5rem;
+    }
+    .small {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    @media (max-width: 640px) {
+      main { padding: 1rem; }
+      .card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>🎵</div>
+    <h1>Dein persönlicher Song – für nur einen Fünfliber</h1>
+    <p class="subtitle">Früher hat man Ständchen gesungen – heute singt die KI für dich.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Bestellformular</h2>
+      <p class="small">
+        Fülle das Formular aus und klicke auf „Bestell‑E‑Mail öffnen“.  
+        Es öffnet sich eine E‑Mail mit allen Angaben, die du nur noch absenden musst.
+      </p>
+
+      <form id="songForm">
+        <label for="name">Dein Name</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Deine E‑Mail-Adresse (für den fertigen Song)</label>
+        <input type="email" id="email" required>
+
+        <label for="style">Lieblings‑Musikstil</label>
+        <input type="text" id="style" placeholder="z.B. Pop, Country, Schlager, Mundart‑Pop" required>
+
+        <label for="title">Wunschtitel oder Thema des Songs</label>
+        <input type="text" id="title" placeholder="z.B. Geburtstag für Anna, Liebeslied, Vereinslied" required>
+
+        <label for="lyrics">Dein Liedtext</label>
+        <textarea id="lyrics" placeholder="Hier deinen eigenen Text einfügen…" required></textarea>
+        <div class="hint">Hinweis: Der Text wird so gut wie möglich übernommen. Kleine Anpassungen für Rhythmus & Melodie sind möglich.</div>
+
+        <div class="twint-box">
+          <strong>Bezahlung per Twint – nur 5.– CHF</strong><br><br>
+          Bitte überweise einen Fünfliber per Twint und schreibe im Vermerk:<br>
+          <em>„Absender + Liedtitel / Thema“</em><br><br>
+          📧 E‑Mail: <strong>blemis@gmx.ch</strong><br>
+          📞 Tel.: <strong>079 674 67 68</strong>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" onclick="openMail()">Bestell‑E‑Mail öffnen</button>
+          <a class="ghost-btn" href="mailto:blemis@gmx.ch">Direkt E‑Mail schreiben</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Dein persönlicher Song – erstellt mit Herz und KI.</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function openMail() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const style = document.getElementById('style').value.trim();
+      const title = document.getElementById('title').value.trim();
+      const lyrics = document.getElementById('lyrics').value.trim();
+
+      if (!name || !email || !style || !title || !lyrics) {
+        alert('Bitte fülle alle Felder aus.');
+        return;
+      }
+
+      const to = 'blemis@gmx.ch';
+      const subject = encodeURIComponent('Bestellung: Persönlicher Song – ' + title);
+      const bodyLines = [
+        'Bestellung: Persönlicher Song',
+        '--------------------------------',
+        'Name: ' + name,
+        'E‑Mail für den fertigen Song: ' + email,
+        'Lieblings‑Musikstil: ' + style,
+        'Titel / Thema: ' + title,
+        '',
+        'Liedtext:',
+        lyrics,
+        '',
+        'Hinweis: Twint‑Zahlung (5.– CHF) mit Vermerk „' + name + ' – ' + title + '“'
+      ];
+      const body = encodeURIComponent(bodyLines.join('\n'));
+
+      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+    }
+  </script>
+</body>
+</html>
