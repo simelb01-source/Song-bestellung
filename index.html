@@ -49,8 +49,7 @@
     }
     input[type="text"],
     input[type="email"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
       padding: 0.6rem 0.7rem;
       border-radius: 0.5rem;
@@ -65,8 +64,7 @@
       resize: vertical;
     }
     input:focus,
-    textarea:focus,
-    select:focus {
+    textarea:focus {
       outline: 2px solid #22c55e;
       border-color: #22c55e;
     }
@@ -93,27 +91,18 @@
       gap: 0.75rem;
       align-items: center;
     }
-    button,
-    .ghost-btn {
+    button {
       border-radius: 999px;
       padding: 0.65rem 1.4rem;
       font-size: 0.95rem;
       cursor: pointer;
       border: none;
-    }
-    button {
       background: #22c55e;
       color: #022c22;
       font-weight: 600;
     }
     button:hover {
       background: #16a34a;
-    }
-    .ghost-btn {
-      background: transparent;
-      border: 1px solid #4b5563;
-      color: #e5e7eb;
-      text-decoration: none;
     }
     footer {
       text-align: center;
@@ -139,7 +128,7 @@
       <h2>Bestellformular</h2>
       <p class="small">
         Fülle das Formular aus und klicke auf „Bestell‑E‑Mail öffnen“.  
-        Es öffnet sich GMX.ch mit allen Angaben, die du nur noch absenden musst.
+        Es öffnet sich dein Mailprogramm mit allen Angaben.
       </p>
 
       <form id="songForm">
@@ -167,13 +156,7 @@
         </div>
 
         <div class="btn-row">
-          <button type="button" onclick="openGMX()">Bestell‑E‑Mail öffnen</button>
-
-          <a class="ghost-btn"
-             href="https://navigator.gmx.net/mail?compose=1&to=blemis@gmx.ch"
-             target="_blank">
-             Direkt E‑Mail über GMX.ch schreiben
-          </a>
+          <button type="button" onclick="openMail()">Bestell‑E‑Mail öffnen</button>
         </div>
       </form>
     </section>
@@ -186,7 +169,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    function openGMX() {
+    function openMail() {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const style = document.getElementById('style').value.trim();
@@ -200,25 +183,18 @@
 
       const subject = encodeURIComponent('Bestellung: Persönlicher Song – ' + title);
 
-      const body =
-        encodeURIComponent(
-          'Bestellung: Persönlicher Song\n' +
-          '--------------------------------\n' +
-          'Name: ' + name + '\n' +
-          'E‑Mail für den fertigen Song: ' + email + '\n' +
-          'Lieblings‑Musikstil: ' + style + '\n' +
-          'Titel / Thema: ' + title + '\n\n' +
-          'Liedtext:\n' + lyrics + '\n\n' +
-          'Hinweis: Twint‑Zahlung (5.– CHF) mit Vermerk „' + name + ' – ' + title + '“'
-        );
+      const body = encodeURIComponent(
+        'Bestellung: Persönlicher Song\n' +
+        '--------------------------------\n' +
+        'Name: ' + name + '\n' +
+        'E‑Mail für den fertigen Song: ' + email + '\n' +
+        'Lieblings‑Musikstil: ' + style + '\n' +
+        'Titel / Thema: ' + title + '\n\n' +
+        'Liedtext:\n' + lyrics + '\n\n' +
+        'Hinweis: Twint‑Zahlung (5.– CHF) mit Vermerk „' + name + ' – ' + title + '“'
+      );
 
-      const url =
-        'https://navigator.gmx.net/mail?compose=1' +
-        '&to=blemis@gmx.ch' +
-        '&subject=' + subject +
-        '&body=' + body;
-
-      window.open(url, '_blank');
+      window.location.href = 'mailto:blemis@gmx.ch?subject=' + subject + '&body=' + body;
     }
   </script>
 </body>
